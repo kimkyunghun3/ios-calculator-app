@@ -38,6 +38,15 @@ final class CalculatorViewController: UIViewController {
         currentNumberLabel.text = "0"
         currentOperatorLabel.text = buttonTitle
     }
+    
+    @IBAction func touchUpDotButton(_ sender: UIButton) {
+        guard let currentNumberLabelText = currentNumberLabel.text else { return }
+        guard (currentNumberLabel.text?.contains(".")) == true else {
+            currentNumberLabel.text = currentNumberLabelText + "."
+            return
+        }
+    }
+    
     private func addInputStack() {
         guard let stack = generateStack() else {
             return
