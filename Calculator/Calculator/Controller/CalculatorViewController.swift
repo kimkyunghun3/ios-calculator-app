@@ -24,6 +24,20 @@ final class CalculatorViewController: UIViewController {
         currentNumberLabel.text = changeDecimalFormat(updatedNumber)
     }
     
+    @IBAction func touchUpOperatorButton(_ sender: UIButton) {
+        guard let currentNumberLabelText = currentNumberLabel.text else { return }
+        guard let currentOperatorLabelText = currentOperatorLabel.text else { return }
+        guard let buttonTitle = sender.currentTitle else { return }
+        addInputStack()
+        
+        if allOperations.isEmpty == false {
+            allOperations.append(currentOperatorLabelText)
+        }
+        
+        allOperations.append(currentNumberLabelText)
+        currentNumberLabel.text = "0"
+        currentOperatorLabel.text = buttonTitle
+    }
     private func addInputStack() {
         guard let stack = generateStack() else {
             return
