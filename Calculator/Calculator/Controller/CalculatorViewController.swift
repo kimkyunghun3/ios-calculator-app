@@ -78,6 +78,13 @@ final class CalculatorViewController: UIViewController {
         allOperations = []
     }
     
+    @IBAction func touchUpClearEntryButton(_ sender: UIButton) {
+        if allOperations.isEmpty {
+            clearAllHistory()
+        } else {
+            currentNumberLabel.text = "0"
+        }
+    }
     private func addInputStack() {
         guard let stack = generateStack() else {
             return
