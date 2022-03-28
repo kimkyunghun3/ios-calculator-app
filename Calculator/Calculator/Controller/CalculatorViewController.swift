@@ -105,6 +105,32 @@ final class CalculatorViewController: UIViewController {
             allOperations = []
         }
     }
+    
+    private func removeComma(from input: String) -> String {
+        return input.replacingOccurrences(of: ",", with: "")
+    }
+    
+    private func clearAllHistory() {
+        calculatorStackView.subviews.forEach { $0.removeFromSuperview() }
+        currentNumberLabel.text = "0"
+        currentOperatorLabel.text = ""
+    }
+    
+    private func changeDecimalFormat(_ text: String) -> String {
+        let zero: NSNumber = 0
+        
+        guard text != "nan" else { return "NaN" }
+        let noCommaText = removeComma(from: text)
+        
+        let numberFomatter = NumberFormatter()
+        numberFomatter.numberStyle = .decimal
+        
+        let number = numberFomatter.number(from: noCommaText) ?? zero
+        
+        let changedNumber = numberFomatter.string(from: number) ?? blank
+        return changedNumber
+    }
+    
     private func addInputStack() {
         guard let stack = generateStack() else {
             return
