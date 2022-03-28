@@ -12,6 +12,9 @@ final class CalculatorViewController: UIViewController {
     
     @IBOutlet weak var currentOperatorLabel: UILabel!
     @IBOutlet weak var currentNumberLabel: UILabel!
+    var allOperations: [String] = []
+    let blank = ""
+    
     @IBAction func touchUpNumberButton(_ sender: UIButton) {
         guard let currentNumberLabelText = currentNumberLabel.text else { return }
         guard let buttonTitle = sender.currentTitle else { return }
@@ -185,7 +188,5 @@ final class CalculatorViewController: UIViewController {
                 animated: true
             )
     }
-    
-    
 }
 
