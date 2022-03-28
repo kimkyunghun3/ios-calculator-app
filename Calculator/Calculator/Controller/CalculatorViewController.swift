@@ -47,6 +47,16 @@ final class CalculatorViewController: UIViewController {
         }
     }
     
+    @IBAction func touchUpZeroButton(_ sender: UIButton) {
+        guard let currentNumberLabelText = currentNumberLabel.text else { return }
+        guard let buttonTitle = sender.currentTitle else { return }
+        
+        if currentNumberLabelText.contains(".") == true {
+            currentNumberLabel.text = currentNumberLabelText + buttonTitle
+        } else {
+            currentNumberLabel.text = changeDecimalFormat(currentNumberLabelText + buttonTitle)
+        }
+    }
     private func addInputStack() {
         guard let stack = generateStack() else {
             return
