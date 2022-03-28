@@ -57,6 +57,21 @@ final class CalculatorViewController: UIViewController {
             currentNumberLabel.text = changeDecimalFormat(currentNumberLabelText + buttonTitle)
         }
     }
+    
+    @IBAction func touchUpPlusMinusSignButton(_ sender: UIButton) {
+        guard var currentNumberLabelText = currentNumberLabel.text else { return }
+        
+        switch currentNumberLabelText.first {
+        case "0":
+            break
+        case "-":
+            _ = currentNumberLabelText.removeFirst()
+        default:
+            currentNumberLabelText.insert("-", at: currentNumberLabelText.startIndex)
+        }
+        
+        currentNumberLabel.text = changeDecimalFormat(currentNumberLabelText)
+    }
     private func addInputStack() {
         guard let stack = generateStack() else {
             return
