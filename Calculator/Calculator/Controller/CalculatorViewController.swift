@@ -72,6 +72,12 @@ final class CalculatorViewController: UIViewController {
         
         currentNumberLabel.text = changeDecimalFormat(currentNumberLabelText)
     }
+    
+    @IBAction func touchUpAllClearButton(_ sender: UIButton) {
+        clearAllHistory()
+        allOperations = []
+    }
+    
     private func addInputStack() {
         guard let stack = generateStack() else {
             return
