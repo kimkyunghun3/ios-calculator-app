@@ -85,6 +85,26 @@ final class CalculatorViewController: UIViewController {
             currentNumberLabel.text = "0"
         }
     }
+
+    @IBAction func touchUpCalculateButton(_ sender: UIButton) {
+        guard let currentNumberLabelText = currentNumberLabel.text else { return }
+        guard let currentOperatorLabelText = currentOperatorLabel.text else { return }
+        
+        allOperations.append(currentOperatorLabelText)
+        allOperations.append(currentNumberLabelText)
+        
+        if allOperations.isEmpty != true {
+            addInputStack()
+            let mergedAllOperation = allOperations.joined(separator: " ")
+            let validOperation = removeComma(from: mergedAllOperation)
+            let formula = ExpressionParser.parse(from: validOperation)
+            let result = formula.result()
+            
+            currentOperatorLabel.text = ""
+            currentNumberLabel.text = changeDecimalFormat("\(result)")
+            allOperations = []
+        }
+    }
     private func addInputStack() {
         guard let stack = generateStack() else {
             return
